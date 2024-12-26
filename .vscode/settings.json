@@ -1,0 +1,10 @@
+{
+    "python.languageServer": "None",
+    "windsurf.enableConfig": {
+
+        "*": true
+    },
+    "windsurfPyright.analysis.diagnosticSeverityOverrides": {},
+    "windsurf.enableModelBasedAutoExecution": true,
+    "workbench.editor.enablePreview": false
+}

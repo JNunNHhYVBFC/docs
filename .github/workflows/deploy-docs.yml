@@ -1,0 +1,48 @@
+name: Развертывание документации
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+  pull_request:
+    paths:
+      - 'docs/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install Mintlify
+        run: npm i -g mintlify
+
+      - name: Build documentation
+        run: |
+          cd docs
+          mintlify build
+        env:
+          NODE_OPTIONS: '--max_old_space_size=4096'
+
+      - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main'
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: docs/.mintlify/docs
+          clean: true
+
+      - name: Check for broken links
+        run: |
+          cd docs
+          mintlify broken-links
