@@ -1,0 +1,155 @@
+---
+title: 'Примеры кода'
+description: 'Примеры кода и конфигураций для работы с Yandex Cloud'
+---
+
+# Примеры кода
+
+## Terraform
+
+### Создание виртуальной машины
+
+```hcl
+resource "yandex_compute_instance" "vm" {
+  name        = "example-vm"
+  platform_id = "standard-v1"
+  zone        = "ru-central1-a"
+
+  resources {
+    cores  = 2
+    memory = 4
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = "fd80qm01ah03dkqb14lc"
+    }
+  }
+
+  network_interface {
+    subnet_id = yandex_vpc_subnet.subnet.id
+    nat       = true
+  }
+}
+```
+
+## Python SDK
+
+### Работа с Object Storage
+
+```python
+import boto3
+
+# Инициализация клиента
+session = boto3.session.Session()
+s3 = session.client(
+    service_name='s3',
+    endpoint_url='https://storage.yandexcloud.net'
+)
+
+# Загрузка файла
+s3.upload_file('local_file.txt', 'my-bucket', 'remote_file.txt')
+
+# Скачивание файла
+s3.download_file('my-bucket', 'remote_file.txt', 'downloaded_file.txt')
+```
+
+## CLI
+
+### Управление кластером Kubernetes
+
+```bash
+# Создание кластера
+yc managed-kubernetes cluster create \
+  --name my-cluster \
+  --network-name default \
+  --zone ru-central1-a \
+  --subnet-name default-ru-central1-a \
+  --public-ip
+
+# Получение конфигурации
+yc managed-kubernetes cluster get-credentials my-cluster
+```
+
+## API Requests
+
+### Работа с Yandex Cloud API
+
+```python
+import requests
+
+def get_token():
+    url = "https://iam.api.cloud.yandex.net/iam/v1/tokens"
+    headers = {"Content-Type": "application/json"}
+    data = {
+        "yandexPassportOauthToken": "YOUR_OAUTH_TOKEN"
+    }
+    response = requests.post(url, headers=headers, json=data)
+    return response.json()["iamToken"]
+
+# Использование токена
+token = get_token()
+headers = {
+    "Authorization": f"Bearer {token}"
+}
+```
+
+## Docker
+
+### Пример Dockerfile
+
+```dockerfile
+FROM ubuntu:20.04
+
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip
+
+COPY requirements.txt .
+RUN pip3 install -r requirements.txt
+
+COPY . .
+CMD ["python3", "app.py"]
+```
+
+## Kubernetes
+
+### Пример деплоймента
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: example
+  template:
+    metadata:
+      labels:
+        app: example
+    spec:
+      containers:
+      - name: example
+        image: cr.yandex/my-registry/app:latest
+        ports:
+        - containerPort: 80
+```
+
+## Получение примеров
+
+Чтобы получить пример кода:
+
+1. Используйте команду `/code`
+2. Укажите тип примера (Terraform, Python, etc.)
+3. Опишите что нужно сделать
+4. Бот предоставит готовый пример
+
+## Дополнительно
+
+- Все примеры регулярно обновляются
+- Поддержка различных языков и фреймворков
+- Готовые шаблоны для типовых задач
+- Возможность адаптации под ваши нужды

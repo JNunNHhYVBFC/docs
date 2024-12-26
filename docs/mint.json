@@ -1,0 +1,77 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "YC Assistant Bot",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#5C33BE",
+    "light": "#6B46C1",
+    "dark": "#5C33BE",
+    "anchors": {
+      "from": "#5C33BE",
+      "to": "#6B46C1"
+    }
+  },
+  "topbarLinks": [
+    {
+      "name": "Поддержка",
+      "url": "mailto:support@ycassistant.ru"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Начать использование",
+    "url": "https://t.me/yc_assistant_bot"
+  },
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    }
+  ],
+  "anchors": [
+    {
+      "name": "Документация",
+      "icon": "book-open-cover",
+      "url": "/docs"
+    },
+    {
+      "name": "GitHub",
+      "icon": "github",
+      "url": "https://github.com/yourusername/yc-assistant-bot"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Начало работы",
+      "pages": [
+        "introduction",
+        "quickstart",
+        "development"
+      ]
+    },
+    {
+      "group": "Основные возможности",
+      "pages": [
+        "essentials/services",
+        "essentials/automation",
+        "essentials/code-examples",
+        "essentials/pricing",
+        "essentials/troubleshooting",
+        "essentials/optimization"
+      ]
+    },
+    {
+      "group": "API Documentation",
+      "pages": [
+        "api-reference/introduction"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "telegram": "https://t.me/yc_assistant_bot",
+    "github": "https://github.com/yourusername/yc-assistant-bot"
+  }
+}
